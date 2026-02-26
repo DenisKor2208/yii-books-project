@@ -40,13 +40,7 @@ make install
 make migrate
 ```
 
-### 6. Настроить права на папки для загрузки
-
-```bash
-docker compose exec php-fpm chmod -R 777 /var/www/public/uploads/books
-```
-
-### 7. Проверить работу приложения
+### 6. Проверить работу приложения
 
 - Откройте в браузере: http://localhost:8080
 
