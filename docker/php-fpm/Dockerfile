@@ -1,0 +1,40 @@
+FROM php:8.2-fpm
+
+RUN apt-get update && apt-get install -y --fix-missing libmcrypt-dev libpng-dev mariadb-client \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libgd-dev \
+    procps \
+    curl \
+    && docker-php-ext-install pdo_mysql
+
+RUN docker-php-ext-configure exif
+RUN docker-php-ext-install exif
+RUN docker-php-ext-enable exif
+
+RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-webp=/usr/include/  --with-jpeg=/usr/include/
+RUN docker-php-ext-install -j$(nproc) gd
+
+RUN apt install jpegoptim optipng pngquant gifsicle libavif-bin -y
+
+RUN apt-get install -y wget unzip curl
+RUN curl -sS https://getcomposer.org/installer |php
+RUN mv composer.phar /usr/local/bin/composer
+
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+COPY ./conf.d /usr/local/etc/php/conf.d/
+
+# Создаём пользователя с UID 1000
+RUN useradd -u 1000 -m -s /bin/bash yii
+
+# Переключаемся на этого пользователя
+USER yii
+
+WORKDIR /var/www
+
+
+

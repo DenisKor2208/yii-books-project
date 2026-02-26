@@ -1,0 +1,42 @@
+# IDE
+# /.idea/
+# /.vscode/
+# *.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*~
+
+# Yii specific
+/protected/runtime/*
+!/protected/runtime/.gitkeep
+/public/assets/*
+!/public/assets/.gitkeep
+/public/uploads/*
+!/public/uploads/books/.gitkeep
+
+# Composer
+/vendor/
+
+# Test databases and reports
+/protected/data/*.db
+/protected/tests/report/
+
+# Logs
+*.log
+
+# Additional runtime (if any in root)
+/runtime/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Docker local configs (if you want to exclude local overrides, uncomment)
+# /docker/*/conf.d/*.local
+# /docker/*/pool.d/*.local
