@@ -58,10 +58,10 @@ services:
     volumes:
       - database:/var/lib/mysql
     environment:
-      - 'MYSQL_ROOT_PASSWORD=secret'
-      - 'MYSQL_USER=user'
-      - 'MYSQL_PASSWORD=secret'
-      - 'MYSQL_DATABASE=yii1'
+      - 'MYSQL_ROOT_PASSWORD=${DB_PASSWORD}'
+      - 'MYSQL_USER=${DB_USER}'
+      - 'MYSQL_PASSWORD=${DB_PASSWORD}'
+      - 'MYSQL_DATABASE=${DB_NAME}'
       - 'MYSQL_GRANT_ALL_PRIVILEGES=yes'
     ports:
       - '33061:3306'
@@ -73,8 +73,8 @@ services:
     container_name: phpmyadmin
     environment:
       - PMA_HOST=mysql
-      - PMA_USER=root
-      - PMA_PASSWORD=secret
+      - PMA_USER=${DB_USER}
+      - PMA_PASSWORD=${DB_PASSWORD}
       - UPLOAD_LIMIT=64M
     restart: always
     ports:
