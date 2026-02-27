@@ -1,53 +1,90 @@
 <?php
 /* @var $this SiteController */
 /* @var $model LoginForm */
-/* @var $form CActiveForm  */
+/* @var $form CActiveForm */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
-$this->breadcrumbs=array(
-	'Login',
-);
+$this->pageTitle = Yii::app()->name . ' - Вход';
 ?>
 
-<h1>Login</h1>
+<!-- Login Container -->
+<div class="login-container">
+	<div class="login-card">
+		<!-- Login Header -->
+		<div class="login-header">
+			<h1 class="login-title">Вход</h1>
+			<p class="login-description">
+				Пожалуйста, заполните форму для входа:
+			</p>
+		</div>
 
-<p>Please fill out the following form with your login credentials:</p>
+		<?php $form = $this->beginWidget('CActiveForm', array(
+			'id' => 'login-form',
+			'enableClientValidation' => true,
+			'clientOptions' => array(
+				'validateOnSubmit' => true,
+			),
+			'htmlOptions' => array('class' => 'login-form'),
+		)); ?>
 
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
-	'enableClientValidation'=>true,
-	'clientOptions'=>array(
-		'validateOnSubmit'=>true,
-	),
-)); ?>
-
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
+		<!-- Required Fields Notice -->
+		<p class="required-notice">
+			Поля, отмеченные <span class="required">*</span>, обязательны.
 		</p>
-	</div>
 
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
+		<!-- Вывод общих ошибок (если есть) -->
+		<?php echo $form->errorSummary($model, '', '', array('class' => 'error-message')); ?>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
+		<!-- Username Field -->
+		<div class="form-group">
+			<?php echo $form->labelEx($model, 'username', array('class' => 'form-label')); ?>
+			<?php echo $form->textField($model, 'username', array(
+				'class' => 'form-control',
+				'placeholder' => 'Введите логин',
+				'autofocus' => true,
+			)); ?>
+			<?php echo $form->error($model, 'username', array('class' => 'text-danger')); ?>
+		</div>
 
-<?php $this->endWidget(); ?>
-</div><!-- form -->
+		<!-- Password Field -->
+		<div class="form-group">
+			<?php echo $form->labelEx($model, 'password', array('class' => 'form-label')); ?>
+			<?php echo $form->passwordField($model, 'password', array(
+				'class' => 'form-control',
+				'placeholder' => 'Введите пароль',
+			)); ?>
+			<?php echo $form->error($model, 'password', array('class' => 'text-danger')); ?>
+		</div>
+
+		<!-- Hint Box -->
+		<div class="hint-box">
+			<i class="fas fa-info-circle me-2"></i>
+			Подсказка: вы можете войти как
+			<span class="credential">demo</span>
+			<span class="credential">demo</span>
+			или
+			<span class="credential">admin</span>
+			<span class="credential">admin</span>.
+		</div>
+
+		<!-- Remember Me Checkbox -->
+		<div class="remember-me">
+			<?php echo $form->checkBox($model, 'rememberMe', array('id' => 'rememberMe')); ?>
+			<?php echo $form->label($model, 'rememberMe', array('for' => 'rememberMe')); ?>
+			<?php echo $form->error($model, 'rememberMe'); ?>
+		</div>
+
+		<!-- Login Button -->
+		<button type="submit" class="btn btn-login">
+			<i class="fas fa-sign-in-alt"></i>
+			Войти
+		</button>
+
+		<?php $this->endWidget(); ?>
+
+		<!-- Login Footer -->
+		<div class="login-footer">
+			<p class="text-muted mb-2">Нет аккаунта?</p>
+			<?php echo CHtml::link('<i class="fas fa-user-plus me-2"></i>Регистрация', array('site/register'), array('escape' => false)); ?>
+		</div>
+	</div>
+</div>

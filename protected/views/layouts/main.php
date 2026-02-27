@@ -1,62 +1,38 @@
 <?php /* @var $this Controller */ ?>
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="language" content="en">
-
-	<!-- blueprint CSS framework -->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/print.css" media="print">
-	<!--[if lt IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection">
-	<![endif]-->
-
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css">
-
+	<meta charset="UTF-8">
+	<meta name="language" content="ru">
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
+
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css">
 </head>
 
 <body>
 
-	<div class="container" id="page">
+	<?php $this->renderPartial('//layouts/_header'); ?>
 
-		<div id="header">
-			<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-		</div><!-- header -->
-
-		<div id="mainmenu">
-			<?php $this->widget('zii.widgets.CMenu', array(
-				'items' => array(
-					array('label' => 'Главная', 'url' => array('/site/index')),
-					array('label' => 'Авторы', 'url' => array('author/index')),
-					array('label' => 'Книги', 'url' => array('book/index')),
-					array('label' => 'Топ авторов', 'url' => array('report/index')),
-					array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-					array('label' => 'Logout (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-				),
-			)); ?>
-		</div><!-- mainmenu -->
-		<?php if (isset($this->breadcrumbs)): ?>
-			<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-				'links' => $this->breadcrumbs,
-			)); ?><!-- breadcrumbs -->
-		<?php endif ?>
-
+	<main class="container">
 		<?php echo $content; ?>
+	</main>
 
-		<div class="clear"></div>
+	<?php $this->renderPartial('//layouts/_footer'); ?>
 
-		<div id="footer">
-			Copyright &copy; <?php echo date('Y'); ?> by My Company.<br />
-			All Rights Reserved.<br />
-			<?php echo Yii::powered(); ?>
-		</div><!-- footer -->
-
-	</div><!-- page -->
-
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Custom JS -->
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/main.js"></script>
 </body>
 
 </html>
